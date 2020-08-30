@@ -1,0 +1,39 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Bold;\f1\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red35\green46\blue57;\red255\green255\blue255;\red62\green62\blue62;
+\red21\green163\blue221;}
+{\*\expandedcolortbl;;\cssrgb\c18039\c23922\c28627;\cssrgb\c100000\c100000\c100000;\cssrgb\c30980\c30980\c30980;
+\cssrgb\c784\c70196\c89412;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\sl480\sa100\partightenfactor0
+
+\f0\b\fs36 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Pipeline Monitoring\
+\pard\pardeftab720\sl540\sa300\partightenfactor0
+
+\f1\b0\fs32 \cf4 \strokec4 Airflow can surface metrics and emails to help you stay on top of pipeline issues.\
+\pard\pardeftab720\sl426\sa100\partightenfactor0
+
+\f0\b \cf2 \strokec2 SLAs\
+\pard\pardeftab720\sl540\sa300\partightenfactor0
+
+\f1\b0 \cf4 \strokec4 Airflow DAGs may optionally specify an SLA, or \'93Service Level Agreement\'94, which is defined as\'a0
+\f0\b a time by which a DAG must complete.
+\f1\b0 \'a0For time-sensitive applications these features are critical for developing trust amongst your pipeline customers and ensuring that data is delivered while it is still meaningful. Slipping SLAs can also be\'a0
+\f0\b early indicators of performance problems
+\f1\b0 , or a need to scale up the size of your Airflow cluster\
+\pard\pardeftab720\sl426\sa100\partightenfactor0
+
+\f0\b \cf2 \strokec2 Emails and Alerts\
+\pard\pardeftab720\sl540\sa300\partightenfactor0
+
+\f1\b0 \cf4 \strokec4 Airflow can be configured to send emails on DAG and task state changes. These state changes may include successes, failures, or retries. Failure emails can allow you to easily trigger alerts. It is common for alerting systems like PagerDuty to accept emails as a source of alerts. If a mission-critical data pipeline fails, you will need to know as soon as possible to get online and get it fixed.\
+\pard\pardeftab720\sl426\sa100\partightenfactor0
+
+\f0\b \cf2 \strokec2 Metrics\
+\pard\pardeftab720\sl540\partightenfactor0
+
+\f1\b0 \cf4 \strokec4 Airflow comes out of the box with the ability to send system metrics using a metrics aggregator called statsd. Statsd can be coupled with metrics visualization tools like\'a0{\field{\*\fldinst{HYPERLINK "https://grafana.com/"}}{\fldrslt 
+\f0\b \cf5 \strokec5 Grafana}}\'a0to provide you and your team high level insights into the overall performance of your DAGs, jobs, and tasks. These systems can be integrated into your alerting system, such as pagerduty, so that you can ensure problems are dealt with immediately. These Airflow system-level metrics allow you and your team to stay ahead of issues before they even occur by watching long-term trends.\
+}

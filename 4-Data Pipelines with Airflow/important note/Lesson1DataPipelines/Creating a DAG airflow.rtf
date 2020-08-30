@@ -1,0 +1,113 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Bold;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 Menlo-Bold;
+\f3\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red35\green46\blue57;\red255\green255\blue255;\red62\green62\blue62;
+\red38\green38\blue38;\red245\green245\blue246;\red14\green32\blue46;\red210\green0\blue53;\red14\green110\blue109;
+\red133\green0\blue2;}
+{\*\expandedcolortbl;;\cssrgb\c18039\c23922\c28627;\cssrgb\c100000\c100000\c100000;\cssrgb\c30980\c30980\c30980;
+\cssrgb\c20000\c20000\c20000;\cssrgb\c96863\c96863\c97255;\cssrgb\c5882\c16863\c23922;\cssrgb\c86667\c6667\c26667;\cssrgb\c0\c50196\c50196;
+\cssrgb\c60000\c0\c0;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\sl480\sa100\partightenfactor0
+
+\f0\b\fs36 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Creating a DAG\
+\pard\pardeftab720\sl540\sa300\partightenfactor0
+
+\f1\b0\fs32 \cf4 \strokec4 Creating a DAG is easy. Give it a name, a description, a start date, and an interval.\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f2\b\fs26 \cf5 \cb6 \strokec5 \uc0\u8237 from
+\f3\b0 \cf7 \strokec7  airflow 
+\f2\b \cf5 \strokec5 import
+\f3\b0 \cf7 \strokec7  DAG\uc0\u8236 \
+\uc0\u8236 \
+\uc0\u8236 \
+divvy_dag = DAG(\uc0\u8236 \
+    \cf8 \strokec8 'divvy'\cf7 \strokec7 ,\uc0\u8236 \
+    
+\f2\b \cf5 \strokec5 description
+\f3\b0 \cf7 \strokec7 =\cf8 \strokec8 'Analyzes Divvy Bikeshare Data'\cf7 \strokec7 ,\uc0\u8236 \
+    start_date=datetime(\cf9 \strokec9 2019\cf7 \strokec7 , \cf9 \strokec9 2\cf7 \strokec7 , \cf9 \strokec9 4\cf7 \strokec7 ),\uc0\u8236 \
+    schedule_interval=\cf8 \strokec8 '@daily'\cf7 \strokec7 )\uc0\u8236 \
+\pard\pardeftab720\sl480\sa100\partightenfactor0
+
+\f0\b\fs36 \cf2 \cb3 \strokec2 \uc0\u8236 Creating Operators to Perform Tasks\
+\pard\pardeftab720\sl540\sa300\partightenfactor0
+
+\fs32 \cf4 \strokec4 Operators
+\f1\b0 \'a0define the atomic steps of work that make up a DAG. Instantiated operators are referred to as\'a0
+\f0\b Tasks
+\f1\b0 .\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f2\b\fs26 \cf5 \cb6 \strokec5 \uc0\u8237 from
+\f3\b0 \cf7 \strokec7  airflow 
+\f2\b \cf5 \strokec5 import
+\f3\b0 \cf7 \strokec7  DAG\uc0\u8236 \
+
+\f2\b \cf5 \strokec5 from
+\f3\b0 \cf7 \strokec7  airflow.operators.python_operator 
+\f2\b \cf5 \strokec5 import
+\f3\b0 \cf7 \strokec7  PythonOperator\uc0\u8236 \
+\uc0\u8236 \
+
+\f2\b \cf5 \strokec5 def
+\f3\b0 \cf7 \strokec7  
+\f2\b \cf10 \strokec10 hello_world
+\f3\b0 \cf7 \strokec7 ():\uc0\u8236 \
+    print(\'93Hello World\'94)\uc0\u8236 \
+\uc0\u8236 \
+divvy_dag = DAG(...)\uc0\u8236 \
+task = PythonOperator(\uc0\u8236 \
+    task_id=\'92hello_world\'92,\uc0\u8236 \
+    python_callable=hello_world,\uc0\u8236 \
+    dag=divvy_dag)\uc0\u8236 \
+\pard\pardeftab720\sl480\sa100\partightenfactor0
+
+\f0\b\fs36 \cf2 \cb3 \strokec2 \uc0\u8236 Schedules\
+\pard\pardeftab720\sl540\sa300\partightenfactor0
+
+\fs32 \cf4 \strokec4 Schedules
+\f1\b0 \'a0are optional, and may be defined with cron strings or Airflow Presets. Airflow provides the following presets:\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl480\partightenfactor0
+\ls1\ilvl0
+\f3\fs28\fsmilli14400 \cf7 \cb6 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec7 \uc0\u8237 @once
+\f1\fs24 \cf4 \cb3 \strokec4 \uc0\u8236 \'a0- Run a DAG once and then never again\cb1 \
+\ls1\ilvl0
+\f3\fs28\fsmilli14400 \cf7 \cb6 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec7 \uc0\u8237 @hourly
+\f1\fs24 \cf4 \cb3 \strokec4 \uc0\u8236 \'a0- Run the DAG every hour\cb1 \
+\ls1\ilvl0
+\f3\fs28\fsmilli14400 \cf7 \cb6 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec7 \uc0\u8237 @daily
+\f1\fs24 \cf4 \cb3 \strokec4 \uc0\u8236 \'a0- Run the DAG every day\cb1 \
+\ls1\ilvl0
+\f3\fs28\fsmilli14400 \cf7 \cb6 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec7 \uc0\u8237 @weekly
+\f1\fs24 \cf4 \cb3 \strokec4 \uc0\u8236 \'a0- Run the DAG every week\cb1 \
+\ls1\ilvl0
+\f3\fs28\fsmilli14400 \cf7 \cb6 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec7 \uc0\u8237 @monthly
+\f1\fs24 \cf4 \cb3 \strokec4 \uc0\u8236 \'a0- Run the DAG every month\cb1 \
+\ls1\ilvl0
+\f3\fs28\fsmilli14400 \cf7 \cb6 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec7 \uc0\u8237 @yearly
+\f1\fs24 \cf4 \cb3 \strokec4 \uc0\u8236 - Run the DAG every year\cb1 \
+\ls1\ilvl0
+\f3\fs28\fsmilli14400 \cf7 \cb6 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec7 \uc0\u8237 None
+\f1\fs24 \cf4 \cb3 \strokec4 \uc0\u8236 \'a0- Only run the DAG when the user initiates it\cb1 \
+\pard\pardeftab720\sl540\sa300\partightenfactor0
+
+\f0\b\fs32 \cf4 \cb3 Start Date:
+\f1\b0 \'a0If your start date is in the past, Airflow will run your DAG as many times as there are schedule intervals between that start date and the current date.\
+\pard\pardeftab720\sl540\partightenfactor0
+
+\f0\b \cf4 End Date:
+\f1\b0 \'a0Unless you specify an optional end date, Airflow will continue to run your DAGs until you disable or delete the DAG.\
+}

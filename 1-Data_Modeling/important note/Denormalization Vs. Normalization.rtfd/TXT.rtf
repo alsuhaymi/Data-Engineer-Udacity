@@ -1,0 +1,69 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;\f2\fswiss\fcharset0 Helvetica-Oblique;
+}
+{\colortbl;\red255\green255\blue255;\red255\green255\blue255;\red22\green28\blue35;\red62\green62\blue62;
+\red35\green46\blue57;\red21\green163\blue221;}
+{\*\expandedcolortbl;;\cssrgb\c100000\c100000\c100000;\cssrgb\c10980\c14902\c18431;\cssrgb\c30980\c30980\c30980;
+\cssrgb\c18039\c23922\c28627;\cssrgb\c784\c70196\c89412;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs32 \cf2 \cb3 \expnd0\expndtw0\kerning0
+Denormalization Vs. Normalization.\cf4 \cb2 \
+Let's take a moment to make sure you understand what was in the demo regarding denormalized vs. normalized data. These are important concepts, so make sure to spend some time reflecting on these.\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\f1\b \cf4 \cb2 Normalization
+\f0\b0  is about trying to increase data integrity by reducing the number of copies of the data. Data that needs to be added or updated will be done in as few places as possible.\cb1 \
+
+\f1\b \cb2 Denormalization
+\f0\b0  is trying to increase performance by reducing the number of joins between tables (as joins can be slow). Data integrity will take a bit of a potential hit, as there will be more copies of the data (to reduce JOINS).\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs40 \cf5 \cb2 Example of Denormalized Data:\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\f0\b0\fs32 \cf4 \cb2 As you saw in the earlier demo, this denormalized table contains a column with the Artist name that includes duplicated rows, and another column with a list of songs.\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs30 \cf6 \cb2 {{\NeXTGraphic table1.png \width14680 \height3340 \noorient \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}\pard\pardeftab720\partightenfactor0
+\cf6 \
+\pard\pardeftab720\partightenfactor0
+
+\fs40 \cf5 Example of Normalized Data:\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\f0\b0\fs32 \cf4 \cb2 Now for normalized data, Amanda used 3NF. You see a few changes:\cb1 \
+\cb2 1) 
+\f2\i No row contains a list of items.
+\f0\i0  For e.g., the list of song has been replaced with each song having its own row in the Song table.\cb1 \
+\cb2 2) 
+\f2\i Transitive dependencies have been removed
+\f0\i0 . For e.g., album ID is the PRIMARY KEY for the album year in Album Table. Similarly, each of the other tables have a unique primary key that can identify the other values in the table (e.g., song id and song name within Song table).\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\f1\b \cf5 \cb2 Song_Table\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs30 \cf6 \cb2 {{\NeXTGraphic table4.png \width9380 \height4880 \noorient \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}\pard\pardeftab720\partightenfactor0
+\cf6 \
+\pard\pardeftab720\partightenfactor0
+
+\fs32 \cf5 Album_Table\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs30 \cf6 \cb2 {{\NeXTGraphic table5.png \width9340 \height2760 \noorient \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}\pard\pardeftab720\partightenfactor0
+\cf6 \
+\pard\pardeftab720\partightenfactor0
+
+\fs32 \cf5 Artist_Table\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs30 \cf6 \cb2 {{\NeXTGraphic table6.png \width5900 \height2060 \noorient \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}\pard\pardeftab720\partightenfactor0
+\cf6 \
+}

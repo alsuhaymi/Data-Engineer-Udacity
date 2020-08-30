@@ -1,0 +1,42 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
+{\fonttbl\f0\fswiss\fcharset0 Helvetica-Bold;\f1\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red35\green46\blue57;\red255\green255\blue255;\red62\green62\blue62;
+\red21\green163\blue221;}
+{\*\expandedcolortbl;;\cssrgb\c18039\c23922\c28627;\cssrgb\c100000\c100000\c100000;\cssrgb\c30980\c30980\c30980;
+\cssrgb\c784\c70196\c89412;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\b\fs36 \cf2 \cb3 \expnd0\expndtw0\kerning0
+ACID Transactions\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\f1\b0\fs32 \cf4 \cb3 Properties of database transactions intended to guarantee validity even in the event of errors or power failures.\cb1 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls1\ilvl0
+\f0\b \cf4 \cb3 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+Atomicity:
+\f1\b0  The whole transaction is processed or nothing is processed. A commonly cited example of an atomic transaction is money transactions between two bank accounts. The transaction of transferring money from one account to the other is made up of two operations. First, you have to withdraw money in one account, and second you have to save the withdrawn money to the second account. An atomic transaction, i.e., when either all operations occur or nothing occurs, keeps the database in a consistent state. This ensures that if either of those two operations (withdrawing money from the 1st account or saving the money to the 2nd account) fail, the money is neither lost nor created. Source {\field{\*\fldinst{HYPERLINK "https://en.wikipedia.org/wiki/Atomicity_%28database_systems%29"}}{\fldrslt \cf5 Wikipedia}} for a detailed description of this example. \cb1 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls1\ilvl0\cf4 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls1\ilvl0
+\f0\b \cf4 \cb3 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+Consistency:
+\f1\b0  Only transactions that abide by constraints and rules are written into the database, otherwise the database keeps the previous state. The data should be correct across all rows and tables. Check out additional information about consistency on {\field{\*\fldinst{HYPERLINK "https://en.wikipedia.org/wiki/Consistency_%28database_systems%29"}}{\fldrslt \cf5 Wikipedia}}.\cb1 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls1\ilvl0\cf4 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls1\ilvl0
+\f0\b \cf4 \cb3 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+Isolation:
+\f1\b0  Transactions are processed independently and securely, order does not matter. A low level of isolation enables many users to access the data simultaneously, however this also increases the possibilities of concurrency effects (e.g., dirty reads or lost updates). On the other hand, a high level of isolation reduces these chances of concurrency effects, but also uses more system resources and transactions blocking each other. Source: {\field{\*\fldinst{HYPERLINK "https://en.wikipedia.org/wiki/Isolation_%28database_systems%29"}}{\fldrslt \cf5 Wikipedia}} \cb1 \
+\ls1\ilvl0
+\f0\b \cb3 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+Durability:
+\f1\b0  Completed transactions are saved to database even in cases of system failure. A commonly cited example includes tracking flight seat bookings. So once the flight booking records a confirmed seat booking, the seat remains booked even if a system failure occurs. Source: {\field{\*\fldinst{HYPERLINK "https://en.wikipedia.org/wiki/ACID"}}{\fldrslt \cf5 Wikipedia}}.}

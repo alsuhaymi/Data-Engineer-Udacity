@@ -1,0 +1,31 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2512
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Bold;\f1\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red35\green46\blue57;\red255\green255\blue255;\red62\green62\blue62;
+}
+{\*\expandedcolortbl;;\cssrgb\c18039\c23922\c28627;\cssrgb\c100000\c100000\c100000;\cssrgb\c30980\c30980\c30980;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\sl480\sa100\partightenfactor0
+
+\f0\b\fs36 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Circling back about HDFS\
+\pard\pardeftab720\sl540\sa300\partightenfactor0
+
+\f1\b0\fs32 \cf4 \strokec4 Previously we have looked over the Hadoop Ecosystem. To refresh those concepts, we have provided reference material here. HDFS (Hadoop Distributed File System) is the file system. HDFS uses MapReduce system as a resource manager.\
+Spark can replace the MapReduce algorithm. Since Spark does not have its own distributed storage system, it leverages using HDFS or AWS S3, or any other distributed storage. Primarily in this course, we will be using AWS S3, but let\'92s review the advantages of using HDFS over AWS S3.\
+\pard\pardeftab720\sl480\sa100\partightenfactor0
+
+\f0\b\fs36 \cf2 \strokec2 What is HDFS?\
+\pard\pardeftab720\sl540\sa300\partightenfactor0
+
+\f1\b0\fs32 \cf4 \strokec4 HDFS (Hadoop Distributed File System) is the file system in the Hadoop ecosystem. Hadoop and Spark are two frameworks providing tools for carrying out big-data related tasks. While Spark is faster than Hadoop, Spark has one drawback. It lacks a distributed storage system. In other words, Spark lacks a system to organize, store and process data files.\
+\pard\pardeftab720\sl480\sa100\partightenfactor0
+
+\f0\b\fs36 \cf2 \strokec2 MapReduce System\
+\pard\pardeftab720\sl540\sa300\partightenfactor0
+
+\f1\b0\fs32 \cf4 \strokec4 HDFS uses MapReduce system as a resource manager to allow the distribution of the files across the hard drives within the cluster. Think of it as the MapReduce System storing the data back on the hard drives after completing all the tasks.\
+\pard\pardeftab720\sl540\partightenfactor0
+\cf4 Spark, on the other hand, runs the operations and holds the data in the RAM memory rather than the hard drives used by HDFS. Since Spark lacks a file distribution system to organize, store and process data files, Spark tools are often installed on Hadoop because Spark can then use the Hadoop Distributed File System (HDFS).\
+}

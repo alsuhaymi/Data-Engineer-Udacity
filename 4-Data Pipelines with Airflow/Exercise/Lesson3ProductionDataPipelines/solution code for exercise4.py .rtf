@@ -1,0 +1,221 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Bold;\f1\fnil\fcharset0 Menlo-Bold;\f2\fnil\fcharset0 Menlo-Regular;
+\f3\fnil\fcharset0 Menlo-Italic;}
+{\colortbl;\red255\green255\blue255;\red35\green46\blue57;\red38\green38\blue38;\red245\green245\blue246;
+\red14\green32\blue46;\red135\green136\blue117;\red210\green0\blue53;\red53\green65\blue117;\red133\green0\blue2;
+\red65\green74\blue82;}
+{\*\expandedcolortbl;;\cssrgb\c18039\c23922\c28627;\cssrgb\c20000\c20000\c20000;\cssrgb\c96863\c96863\c97255;
+\cssrgb\c5882\c16863\c23922;\cssrgb\c60000\c60000\c53333;\cssrgb\c86667\c6667\c26667;\cssrgb\c26667\c33333\c53333;\cssrgb\c60000\c0\c0;
+\cssrgb\c32157\c36078\c39608;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\sl533\sa100\partightenfactor0
+
+\f0\b\fs40 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Here is the Solution for Exercise 4: Building a Full Pipeline\
+\pard\pardeftab720\sl480\sa100\partightenfactor0
+
+\fs36 \cf2 This is the solution code for exercise4.py\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f1\fs26 \cf3 \cb4 \strokec3 \uc0\u8237 import
+\f2\b0 \cf5 \strokec5  datetime\uc0\u8236 \
+\uc0\u8236 \
+
+\f1\b \cf3 \strokec3 from
+\f2\b0 \cf5 \strokec5  airflow 
+\f1\b \cf3 \strokec3 import
+\f2\b0 \cf5 \strokec5  DAG\uc0\u8236 \
+\uc0\u8236 \
+
+\f1\b \cf3 \strokec3 from
+\f2\b0 \cf5 \strokec5  airflow.operators 
+\f1\b \cf3 \strokec3 import
+\f2\b0 \cf5 \strokec5  (\uc0\u8236 \
+    FactsCalculatorOperator,\uc0\u8236 \
+    HasRowsOperator,\uc0\u8236 \
+    S3ToRedshiftOperator\uc0\u8236 \
+)\uc0\u8236 \
+\uc0\u8236 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\i \cf6 \strokec6 #
+\f2\i0 \cf5 \strokec5 \uc0\u8236 \
+
+\f3\i \cf6 \strokec6 # The following DAG performs the following functions:
+\f2\i0 \cf5 \strokec5 \uc0\u8236 \
+
+\f3\i \cf6 \strokec6 #
+\f2\i0 \cf5 \strokec5 \uc0\u8236 \
+
+\f3\i \cf6 \strokec6 #       1. Loads Trip data from S3 to RedShift
+\f2\i0 \cf5 \strokec5 \uc0\u8236 \
+
+\f3\i \cf6 \strokec6 #       2. Performs a data quality check on the Trips table in RedShift
+\f2\i0 \cf5 \strokec5 \uc0\u8236 \
+
+\f3\i \cf6 \strokec6 #       3. Uses the FactsCalculatorOperator to create a Facts table in Redshift
+\f2\i0 \cf5 \strokec5 \uc0\u8236 \
+
+\f3\i \cf6 \strokec6 #           a. **NOTE**: to complete this step you must complete the FactsCalcuatorOperator
+\f2\i0 \cf5 \strokec5 \uc0\u8236 \
+
+\f3\i \cf6 \strokec6 #              skeleton defined in plugins/operators/facts_calculator.py
+\f2\i0 \cf5 \strokec5 \uc0\u8236 \
+
+\f3\i \cf6 \strokec6 #
+\f2\i0 \cf5 \strokec5 \uc0\u8236 \
+dag = DAG(\cf7 \strokec7 "lesson3.exercise4"\cf5 \strokec5 , start_date=datetime.datetime.utcnow())\uc0\u8236 \
+\uc0\u8236 \
+
+\f3\i \cf6 \strokec6 #
+\f2\i0 \cf5 \strokec5 \uc0\u8236 \
+
+\f3\i \cf6 \strokec6 # The following code will load trips data from S3 to RedShift. Use the s3_key
+\f2\i0 \cf5 \strokec5 \uc0\u8236 \
+
+\f3\i \cf6 \strokec6 #       "data-pipelines/divvy/unpartitioned/divvy_trips_2018.csv"
+\f2\i0 \cf5 \strokec5 \uc0\u8236 \
+
+\f3\i \cf6 \strokec6 #       and the s3_bucket "udacity-dend"
+\f2\i0 \cf5 \strokec5 \uc0\u8236 \
+
+\f3\i \cf6 \strokec6 #
+\f2\i0 \cf5 \strokec5 \uc0\u8236 \
+copy_trips_task = S3ToRedshiftOperator(\uc0\u8236 \
+    task_id=\cf7 \strokec7 "load_trips_from_s3_to_redshift"\cf5 \strokec5 ,\uc0\u8236 \
+    dag=dag,\uc0\u8236 \
+    table=\cf7 \strokec7 "trips"\cf5 \strokec5 ,\uc0\u8236 \
+    redshift_conn_id=\cf7 \strokec7 "redshift"\cf5 \strokec5 ,\uc0\u8236 \
+    aws_credentials_id=\cf7 \strokec7 "aws_credentials"\cf5 \strokec5 ,\uc0\u8236 \
+    s3_bucket=\cf7 \strokec7 "udacity-dend"\cf5 \strokec5 ,\uc0\u8236 \
+    s3_key=\cf7 \strokec7 "data-pipelines/divvy/unpartitioned/divvy_trips_2018.csv"\cf5 \strokec5 \uc0\u8236 \
+)\uc0\u8236 \
+\uc0\u8236 \
+
+\f3\i \cf6 \strokec6 #
+\f2\i0 \cf5 \strokec5 \uc0\u8236 \
+
+\f3\i \cf6 \strokec6 #  Data quality check on the Trips table
+\f2\i0 \cf5 \strokec5 \uc0\u8236 \
+
+\f3\i \cf6 \strokec6 #
+\f2\i0 \cf5 \strokec5 \uc0\u8236 \
+check_trips = HasRowsOperator(\uc0\u8236 \
+    task_id=\cf7 \strokec7 "check_trips_data"\cf5 \strokec5 ,\uc0\u8236 \
+    dag=dag,\uc0\u8236 \
+    redshift_conn_id=\cf7 \strokec7 "redshift"\cf5 \strokec5 ,\uc0\u8236 \
+    table=\cf7 \strokec7 "trips"\cf5 \strokec5 \uc0\u8236 \
+)\uc0\u8236 \
+\uc0\u8236 \
+
+\f3\i \cf6 \strokec6 #
+\f2\i0 \cf5 \strokec5 \uc0\u8236 \
+
+\f3\i \cf6 \strokec6 # We use the FactsCalculatorOperator to create a Facts table in RedShift. The fact column is
+\f2\i0 \cf5 \strokec5 \uc0\u8236 \
+
+\f3\i \cf6 \strokec6 #  `tripduration` and the groupby_column is `bikeid`
+\f2\i0 \cf5 \strokec5 \uc0\u8236 \
+
+\f3\i \cf6 \strokec6 #
+\f2\i0 \cf5 \strokec5 \uc0\u8236 \
+calculate_facts = FactsCalculatorOperator(\uc0\u8236 \
+    task_id=\cf7 \strokec7 "calculate_facts_trips"\cf5 \strokec5 ,\uc0\u8236 \
+    dag=dag,\uc0\u8236 \
+    redshift_conn_id=\cf7 \strokec7 "redshift"\cf5 \strokec5 ,\uc0\u8236 \
+    origin_table=\cf7 \strokec7 "trips"\cf5 \strokec5 ,\uc0\u8236 \
+    destination_table=\cf7 \strokec7 "trips_facts"\cf5 \strokec5 ,\uc0\u8236 \
+    fact_column=\cf7 \strokec7 "tripduration"\cf5 \strokec5 ,\uc0\u8236 \
+    groupby_column=\cf7 \strokec7 "bikeid"\cf5 \strokec5 \uc0\u8236 \
+)\uc0\u8236 \
+\uc0\u8236 \
+
+\f3\i \cf6 \strokec6 #
+\f2\i0 \cf5 \strokec5 \uc0\u8236 \
+
+\f3\i \cf6 \strokec6 # Task ordering for the DAG tasks 
+\f2\i0 \cf5 \strokec5 \uc0\u8236 \
+
+\f3\i \cf6 \strokec6 #
+\f2\i0 \cf5 \strokec5 \uc0\u8236 \
+copy_trips_task >> check_trips\uc0\u8236 \
+check_trips >> calculate_facts\uc0\u8236 \
+\pard\pardeftab720\sl480\sa100\partightenfactor0
+
+\f0\b\fs36 \cf2 \cb1 \strokec2 \uc0\u8236 This is the solution code for the Custom Operator:\'a0
+\f1\fs32\fsmilli16200 \cf5 \cb4 \strokec5 \uc0\u8237 facts_calculator
+\f0\fs36 \cf2 \cb1 \strokec2 \uc0\u8236 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f1\fs26 \cf3 \cb4 \strokec3 \uc0\u8237 import
+\f2\b0 \cf5 \strokec5  logging\uc0\u8236 \
+\uc0\u8236 \
+
+\f1\b \cf3 \strokec3 from
+\f2\b0 \cf5 \strokec5  airflow.hooks.postgres_hook 
+\f1\b \cf3 \strokec3 import
+\f2\b0 \cf5 \strokec5  PostgresHook\uc0\u8236 \
+
+\f1\b \cf3 \strokec3 from
+\f2\b0 \cf5 \strokec5  airflow.models 
+\f1\b \cf3 \strokec3 import
+\f2\b0 \cf5 \strokec5  BaseOperator\uc0\u8236 \
+
+\f1\b \cf3 \strokec3 from
+\f2\b0 \cf5 \strokec5  airflow.utils.decorators 
+\f1\b \cf3 \strokec3 import
+\f2\b0 \cf5 \strokec5  apply_defaults\uc0\u8236 \
+\uc0\u8236 \
+\uc0\u8236 \
+
+\f1\b \cf3 \strokec3 class
+\f2\b0 \cf5 \strokec5  
+\f1\b \cf8 \strokec8 FactsCalculatorOperator
+\f2\b0 \cf5 \strokec5 (BaseOperator):\uc0\u8236 \
+    facts_sql_template = \cf7 \strokec7 """\uc0\u8236 \
+    DROP TABLE IF EXISTS \{destination_table\};\uc0\u8236 \
+    CREATE TABLE \{destination_table\} AS\uc0\u8236 \
+    SELECT\uc0\u8236 \
+        \{groupby_column\},\uc0\u8236 \
+        MAX(\{fact_column\}) AS max_\{fact_column\},\uc0\u8236 \
+        MIN(\{fact_column\}) AS min_\{fact_column\},\uc0\u8236 \
+        AVG(\{fact_column\}) AS average_\{fact_column\}\uc0\u8236 \
+    FROM \{origin_table\}\uc0\u8236 \
+    GROUP BY \{groupby_column\};\uc0\u8236 \
+    """\cf5 \strokec5 \uc0\u8236 \
+\uc0\u8236 \
+    @apply_defaults\uc0\u8236 \
+    
+\f1\b \cf3 \strokec3 def
+\f2\b0 \cf5 \strokec5  
+\f1\b \cf9 \strokec9 __init__
+\f2\b0 \cf5 \strokec5 (self,\uc0\u8236 \
+                 redshift_conn_id=\cf7 \strokec7 ""\cf5 \strokec5 ,\uc0\u8236 \
+                 origin_table=\cf7 \strokec7 ""\cf5 \strokec5 ,\uc0\u8236 \
+                 destination_table=\cf7 \strokec7 ""\cf5 \strokec5 ,\uc0\u8236 \
+                 fact_column=\cf7 \strokec7 ""\cf5 \strokec5 ,\uc0\u8236 \
+                 groupby_column=\cf7 \strokec7 ""\cf5 \strokec5 ,\uc0\u8236 \
+                 *args, **kwargs):\uc0\u8236 \
+\uc0\u8236 \
+        super(FactsCalculatorOperator, self).__init__(*args, **kwargs)\uc0\u8236 \
+        self.redshift_conn_id = redshift_conn_id\uc0\u8236 \
+        self.origin_table = origin_table\uc0\u8236 \
+        self.destination_table = destination_table\uc0\u8236 \
+        self.fact_column = fact_column\uc0\u8236 \
+        self.groupby_column = groupby_column\uc0\u8236 \
+\uc0\u8236 \
+    
+\f1\b \cf3 \strokec3 def
+\f2\b0 \cf5 \strokec5  
+\f1\b \cf9 \strokec9 execute
+\f2\b0 \cf5 \strokec5 (self, context):\uc0\u8236 \
+        redshift = PostgresHook(postgres_conn_id=self.redshift_conn_id)\uc0\u8236 \
+        facts_sql = FactsCalculatorOperator.facts_sql_template.format(\uc0\u8236 \
+            origin_table=self.origin_table,\uc0\u8236 \
+            destination_table=self.destination_table,\uc0\u8236 \
+            fact_column=self.fact_column,\uc0\u8236 \
+            groupby_column=self.groupby_column\uc0\u8236 \
+        )\uc0\u8236 \
+        redshift.run(facts_sql)\cf10 \strokec10 \uc0\u8236 \
+}
